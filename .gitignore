@@ -1,0 +1,35 @@
+########################
+# global ignore file
+########################
+#
+# ignoring temporary files (left by e.g. vim)
+# ignoring by common IDE's used directories/files
+.git/
+.htpasswd
+.DS_Store
+._.DS_Store
+Thumbs.db
+._*
+*.bak
+*.old*
+*.bak.*
+*.orig
+logs/*
+.buildpath
+.cache
+.project
+.session
+.settings
+.TemporaryItems
+.webprj
+.idea
+nbproject/
+#
+# ignore ExtensionBuilder config and the local typoscript constants
+#
+ExtensionBuilder.json
+
+#
+# ignore other not versioned folders
+#
+.sass-cache

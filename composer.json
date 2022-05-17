@@ -1,0 +1,26 @@
+{
+    "name": "mbhsoft/page-redirect-handler",
+    "type": "typo3-cms-extension",
+    "description": "Add description...",
+    "keywords": [
+        "TYPO3",
+        "extension"
+    ],
+    "homepage": "http://www.mbh-software.de",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "require": {
+        "typo3/cms-core": "^10.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MbhSoftware\\PageRedirectHander\\": "Classes"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "page_redirect_handler"
+        }
+    }
+}
