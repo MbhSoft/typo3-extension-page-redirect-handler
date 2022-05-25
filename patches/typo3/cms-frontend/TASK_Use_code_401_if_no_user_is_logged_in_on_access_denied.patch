@@ -1,0 +1,38 @@
+Index: Classes/Controller/ErrorController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Classes/Controller/ErrorController.php b/Classes/Controller/ErrorController.php
+--- a/Classes/Controller/ErrorController.php	(revision 2ada453940a0e134104956d310c790088f3043b6)
++++ b/Classes/Controller/ErrorController.php	(date 1652368592683)
+@@ -19,6 +19,7 @@
+ 
+ use Psr\Http\Message\ResponseInterface;
+ use Psr\Http\Message\ServerRequestInterface;
++use TYPO3\CMS\Core\Context\Context;
+ use TYPO3\CMS\Core\Controller\ErrorPageController;
+ use TYPO3\CMS\Core\Error\Http\InternalServerErrorException;
+ use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
+@@ -115,12 +116,19 @@
+      */
+     public function accessDeniedAction(ServerRequestInterface $request, string $message, array $reasons = []): ResponseInterface
+     {
+-        $errorHandler = $this->getErrorHandlerFromSite($request, 403);
++        $statusCode = 403;
++        $context = GeneralUtility::makeInstance(Context::class);
++        $userAspect = $context->getAspect('frontend.user');
++        if (!$userAspect->isLoggedIn()) {
++            $statusCode = 401;
++        }
++
++        $errorHandler = $this->getErrorHandlerFromSite($request, $statusCode);
+         if ($errorHandler instanceof PageErrorHandlerInterface) {
+             return $errorHandler->handlePageError($request, $message, $reasons);
+         }
+         try {
+-            return $this->handleDefaultError($request, 403, $message);
++            return $this->handleDefaultError($request, $statusCode, $message);
+         } catch (\RuntimeException $e) {
+             throw new PageNotFoundException($message, 1518472195);
+         }

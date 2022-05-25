@@ -21,6 +21,11 @@
     "extra": {
         "typo3/cms": {
             "extension-key": "page_redirect_handler"
+        },
+        "patches": {
+            "typo3/cms-frontend": {
+                "[TASK] Use code 401 if no user is logged in on access denied": "https://raw.githubusercontent.com/MbhSoft/typo3-extension-page-redirect-handler/1.1.0/patches/typo3/cms-frontend/TASK_Use_code_401_if_no_user_is_logged_in_on_access_denied.patch"
+            }
         }
     }
 }
