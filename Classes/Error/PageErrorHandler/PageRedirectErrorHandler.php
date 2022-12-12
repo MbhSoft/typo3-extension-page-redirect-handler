@@ -64,10 +64,12 @@ class PageRedirectErrorHandler implements PageErrorHandlerInterface
             }
             $queryString = HttpUtility::buildQueryString($queryParams, '?');
         }
+        $errorRedirectTargetStatusCode = isset($this->errorHandlerConfiguration['errorRedirectTargetStatuscode']) ? (int)$this->errorHandlerConfiguration['errorRedirectTargetStatuscode']
+            : 307;
 
         return new RedirectResponse(
             $resolvedUrl . $queryString,
-            (int)$this->errorHandlerConfiguration['errorRedirectTargetStatuscode'] ?: 307,
+            $errorRedirectTargetStatusCode,
             ['X-Redirect-By' => 'TYPO3 ' . $this->statusCode . 'errorHandling ']
         );
     }
